@@ -2,6 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import mainRoutes from './mainRoutes.js'
 const PORT = process.env.PORT
 const MONGO_URI = process.env.MONGO_URI
 
@@ -16,10 +17,12 @@ if (!MONGO_URI) {
     process.exit(1)
 }
 
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.send(' Hi from server.')
 })
 
+
+app.use('/api', mainRoutes)
 
 
 
