@@ -5,6 +5,7 @@ import bcryptjs from "bcryptjs";
 const { SALT_ROUNDS } = process.env;
 
 export const createStudent = async (req, res) => {
+    let savedUser;
     try {
         const {
             name,
@@ -38,7 +39,7 @@ export const createStudent = async (req, res) => {
             status: "active",
         });
 
-        const savedUser = await newUser.save();
+        savedUser = await newUser.save();
 
         // 4. Create the Student Profile Document
         const newProfile = new StudentProfile({
@@ -58,6 +59,7 @@ export const createStudent = async (req, res) => {
         console.error("Error creating student:", error);
         if(savedUser?._id){
             await User.findByIdAndDelete(savedUser._id);
+            console.log("Rolled back user creation due to profile creation failure.");
         }
         res
             .status(500)

@@ -267,7 +267,7 @@ const CreateStudent = () => {
                         <select
                             name="religion"
                             value={formData.religion}
-                            onChange={handleChange}
+                            onChange={handleChange} required
                         >
                             <option value="">Select Religion</option>
                             <option value="Islam">Islam</option>
@@ -282,7 +282,7 @@ const CreateStudent = () => {
                         <select
                             name="gender"
                             value={formData.gender}
-                            onChange={handleChange}
+                            onChange={handleChange} required
                         >
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
@@ -413,7 +413,7 @@ const CreateStudent = () => {
                         <select
                             name="version"
                             value={formData.version}
-                            onChange={handleChange}
+                            onChange={handleChange} required
                         >
                             <option value="">Select Version</option>
                             <option value="Bangla">Bangla</option>
