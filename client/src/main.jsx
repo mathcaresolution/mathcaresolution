@@ -5,7 +5,9 @@ import Login from './pages/Login.jsx'
 import CreateStudent from './pages/CreateStudent.jsx'
 import { Routes, Route } from 'react-router-dom'
 import CreateUser from './pages/CreateUser.jsx'
+import ListAllStudents from './pages/ListAllStudents.jsx'
 import App from './App.jsx'
+import NavBar from './components/NavBar.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -15,6 +17,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/create-user" element={<CreateUser />} />
         <Route path="/create-student" element={<CreateStudent />} />
+        <Route path='/all-students' element={<ListAllStudents />} />
         
       </Routes>
     </BrowserRouter>

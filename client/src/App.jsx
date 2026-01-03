@@ -32,9 +32,8 @@ function App() {
   }
   return (
     <>
-      <Header />
       <NavBar />
-
+      <Header />
       {renderview()}
 
 

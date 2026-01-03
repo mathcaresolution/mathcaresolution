@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {api} from '../utils/api.js'
+import NavBar from "../components/NavBar";
 const Login = () => {
     const [formData, setFormData] = useState({
         identifier: "",
@@ -36,6 +37,7 @@ const Login = () => {
 
     return (
         <div className="login">
+            <NavBar/>
             <h2>Login</h2>
             {status && <p>{status}</p>}
             <form onSubmit={handleSubmit}>

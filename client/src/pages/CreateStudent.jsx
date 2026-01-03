@@ -1,65 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../utils/api.js";
 import "./CreateStudent.scss";
+import NavBar from "../components/NavBar.jsx";
+import { InitialStudentForm, ClassLabels, ClassOptions, ReligionOptions, GenderOptions } from '../utils/studentConstants.js'
 
 const CreateStudent = () => {
-    const [formData, setFormData] = useState({
-        // User Basic Info
-        name: "",
-        nameBN: "",
-        mobile: "",
-        email: "",
-        religion: "",
-        gender: "",
-
-        // Student Profile Info
-        fatherName: "",
-        fatherNameBN: "",
-        motherName: "",
-        motherNameBN: "",
-        dateOfBirth: "",
-        birthCertificateNo: "",
-        fatherNID: "",
-        motherNID: "",
-
-        // Academic Info
-
-        classGrade: "",
-        version: "",
-        group: "N/A",
-        residentialStatus: "",
-        isUsingTransport: false,
-    });
+    const [formData, setFormData] = useState(InitialStudentForm);
 
     const [batchCategory, setBatchCategory] = useState("");
     const [message, setMessage] = useState("");
     const [statusType, setStatusType] = useState("");
 
-    const classLabels = {
-        Play: "Play",
-        Nursery: "Nursery",
-        KG: "Kindergarten",
-        1: "One",
-        2: "Two",
-        3: "Three",
-        4: "Four",
-        5: "Five",
-        6: "Six",
-        7: "Seven",
-        8: "Eight",
-        9: "Nine",
-        10: "Ten",
-        11: "Eleven",
-        12: "Twelve",
-    };
-    const classOptions = {
-        primary: ["Play", "Nursery", "KG", "1", "2", "3", "4", "5"],
-        cadet: ["6", "7", "8"],
-        school: ["6", "7", "8", "9", "10", "11", "12"],
-    };
+
     const getClassOptions = () => {
         const key = batchCategory ? batchCategory.toLowerCase() : "";
-        return classOptions[key] || [];
+        return ClassOptions[key] || [];
     };
 
     const handleBatchChange = (e) => {
@@ -108,32 +63,8 @@ const CreateStudent = () => {
             setStatusType("success");
 
             // Reset form
-            setFormData({
-                name: "",
-                nameBN: "",
-                mobile: "",
-                email: "",
-                religion: "",
-                gender: "",
-
-                // Student Profile Info
-                fatherName: "",
-                fatherNameBN: "",
-                motherName: "",
-                motherNameBN: "",
-                dateOfBirth: "",
-                birthCertificateNo: "",
-                fatherNID: "",
-                motherNID: "",
-
-                // Academic Info
-                batchCategory: "",
-                classGrade: "",
-                version: "",
-                group: "N/A",
-                residentialStatus: "",
-                isUsingTransport: false,
-            });
+            setFormData(InitialStudentForm);
+            setBatchCategory("")
         } catch (error) {
             setMessage(`Error: ${error.message}`);
             setStatusType("error");
@@ -167,6 +98,7 @@ const CreateStudent = () => {
 
     return (
         <div className="create-user">
+            <NavBar />
             <h2>Register New Student</h2>
             {message && <p className={`message ${statusType}`}>{message}</p>}
 
@@ -353,38 +285,17 @@ const CreateStudent = () => {
                             Select Batch
                         </label>
                         <div style={{ display: "flex", gap: "15px" }}>
-                            <label style={{ cursor: "pointer" }}>
-                                <input
-                                    type="radio"
-                                    name="batchCat"
-                                    value="Primary"
-                                    checked={batchCategory === "Primary"}
-                                    onChange={handleBatchChange}
-                                />{" "}
-                                Primary
-                            </label>
+                            {Object.keys(ClassOptions).map(cat => (
+                                <label key={cat} style={{ cursor: "pointer", testTransform: 'capitalize' }}>
+                                    <input type="radio" name="batchCat" value={cat.charAt(0).toUpperCase() + cat.slice(1)}
+                                        checked={batchCategory.toLocaleLowerCase() === cat.toLowerCase()}
+                                        onChange={handleBatchChange} />{""}
+                                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                                </label>
+                            ))}
 
-                            <label style={{ cursor: "pointer" }}>
-                                <input
-                                    type="radio"
-                                    name="batchCat"
-                                    value="School"
-                                    checked={batchCategory === "School"}
-                                    onChange={handleBatchChange}
-                                />{" "}
-                                School
-                            </label>
-                            <label style={{ cursor: "pointer" }}>
-                                <input
-                                    type="radio"
-                                    name="batchCat"
-                                    value="Cadet"
-                                    checked={batchCategory === "Cadet"}
-                                    onChange={handleBatchChange}
-                                />{" "}
-                                Cadet
-                            </label>
                         </div>
+
                     </div>
 
                     <div className="form-group">
@@ -402,7 +313,7 @@ const CreateStudent = () => {
                             </option>
                             {getClassOptions().map((cls) => (
                                 <option key={cls} value={cls}>
-                                    {classLabels[cls]}
+                                    {ClassLabels[cls]}
                                 </option>
                             ))}
                         </select>
