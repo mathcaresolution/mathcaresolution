@@ -4,6 +4,7 @@
   "description": "Feature by feature implementations. \r First itteration is user creation.",
   "main": "index.js",
   "scripts": {
+    "install-all": "concurrently \"cd server && npm install\" \"cd client && npm install\"",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\"",
     "server": "npm --prefix ../server run dev",
