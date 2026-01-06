@@ -13,7 +13,7 @@ app.use(async (req, res, next) => {
         await dbConnection()
         next()
     } catch (error) {
-        console.error("DB Connec tion Error in Middleware:", error)
+        console.error("DB Connection Error in Middleware:", error)
         res.status(500).json({ error: "Database connection failed" })
 
     }
