@@ -18,9 +18,6 @@ function App() {
     <>
     <NavBar/>
     <Header/>
-    <RoleGate allowedRoles={['super', 'admin']}>
-      <CreateUser/>
-    </RoleGate>
     </>
   )
 
