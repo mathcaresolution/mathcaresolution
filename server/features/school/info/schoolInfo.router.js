@@ -4,7 +4,7 @@ import {
     getSchoolInfo,
     createSchoolInfo,
     updateSchoolInfo,
-    deleteSchoolInfo
+    deleteSchoolInfo,
 } from './schoolInfo.controller.js';
 
 const router = express.Router();

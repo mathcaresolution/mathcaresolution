@@ -39,9 +39,11 @@ const NavBar = () => {
 
             <div className="nav-links">
                 <Link to="/">Home</Link>
+                {!isAuthenticated && <Link to="/admission">Apply Online</Link>}
 
                 <RoleGate allowedRoles={['super', 'admin', 'desk']}>
                     <Link to="/all-students">Students</Link>
+                    <Link to="/admission-requests">Requests</Link>
                 </RoleGate>
 
                 <RoleGate allowedRoles={['super', 'admin']}>
@@ -51,6 +53,10 @@ const NavBar = () => {
 
                 <RoleGate allowedRoles={['super', 'admin', 'desk', 'student', 'teacher']}>
                     <Link to="/dashboard">Dashboard</Link>
+                </RoleGate>
+
+                <RoleGate allowedRoles={['student']}>
+                    <Link to="/profile">Profile</Link>
                 </RoleGate>
             </div>
 
